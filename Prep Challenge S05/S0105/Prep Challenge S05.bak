@@ -1,0 +1,339 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2018.4">
+  <Nodes>
+    <Node ToolID="1">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="42" y="18" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <File OutputFileName="" RecordLimit="" SearchSubDirs="False" FileFormat="25">C:\Users\e659958\Downloads\PREP\Prep Blog 05\week5input.xlsx|||`Week commencing 17th June 19$`</File>
+          <FormatSpecificOptions>
+            <FirstRowData>False</FirstRowData>
+            <ImportLine>1</ImportLine>
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>week5input.xlsx
+Table=`Week commencing 17th June 19$`</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <Dependencies>
+          <Implicit />
+        </Dependencies>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Date" size="255" source="File: C:\Users\e659958\Downloads\PREP\Prep Blog 05\week5input.xlsx|||`Week commencing 17th June 19$`" type="V_String" />
+            <Field name="Customer ID" source="File: C:\Users\e659958\Downloads\PREP\Prep Blog 05\week5input.xlsx|||`Week commencing 17th June 19$`" type="Double" />
+            <Field name="Notes" size="255" source="File: C:\Users\e659958\Downloads\PREP\Prep Blog 05\week5input.xlsx|||`Week commencing 17th June 19$`" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="2">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="42" y="150" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <File OutputFileName="" RecordLimit="" SearchSubDirs="False" FileFormat="25">C:\Users\e659958\Downloads\PREP\Prep Blog 05\week5input.xlsx|||`Week commencing 24th June 19$`</File>
+          <FormatSpecificOptions>
+            <FirstRowData>False</FirstRowData>
+            <ImportLine>1</ImportLine>
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>week5input.xlsx
+Table=`Week commencing 24th June 19$`</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <Dependencies>
+          <Implicit />
+        </Dependencies>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Date" size="255" source="File: C:\Users\e659958\Downloads\PREP\Prep Blog 05\week5input.xlsx|||`Week commencing 24th June 19$`" type="V_String" />
+            <Field name="Customer ID" source="File: C:\Users\e659958\Downloads\PREP\Prep Blog 05\week5input.xlsx|||`Week commencing 24th June 19$`" type="Double" />
+            <Field name="Notes" size="255" source="File: C:\Users\e659958\Downloads\PREP\Prep Blog 05\week5input.xlsx|||`Week commencing 24th June 19$`" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="3">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="390" y="18" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="IF      [Date]= &quot;Monday&quot; THEN 1&#xA; ELSEIF [Date]= &quot;Tuesday&quot; THEN 2&#xA; ELSEIF [Date]= &quot;Wednesday&quot; THEN 3&#xA; ELSEIF [Date]= &quot;Thursday&quot; THEN 4&#xA; ELSEIF [Date]= &quot;Friday&quot; THEN 5&#xA; ELSEIF [Date]= &quot;Saturday&quot; THEN 6&#xA; ELSE  7&#xA;ENDIF" field="Daynumber" size="2" type="Int16" />
+            <FormulaField expression="ToDate(DateTimeAdd('2019-06-17',[Daynumber]-1,'days'))" field="True Date" size="1073741823" type="V_WString" />
+            <FormulaField expression="IF Contains([Notes], &quot;$&quot;) then  Right((REGEX_REPLACE([Notes],&quot;[^0-9]&quot;,'')),4) else&#xA;TONUMBER(REGEX_REPLACE([Notes],&quot;[^0-9]?&quot;,''))&#xA;EndIF&#xA;" field="Policy No " size="1073741823" type="V_WString" />
+            <FormulaField expression="IF Length(ToString([Policy No ]))&gt;4 THEN 0 ELSE [Policy No ] ENDif" field="Policy No CHECK" size="1073741823" type="V_WString" />
+            <FormulaField expression="IF Contains([Notes], &quot;balance&quot;) then 1 ELSE 0 EndIF" field="Balance?" size="1073741823" type="V_WString" />
+            <FormulaField expression="IF Contains([Notes], &quot;compl&quot;) then 1 ELSE 0 EndIF" field="Complaint?" size="1073741823" type="V_WString" />
+            <FormulaField expression="IF Contains([Notes], &quot;Statement&quot;)   then 1 ELSE 0 EndIF" field="Statement?" size="1073741823" type="V_WString" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Daynumber = IF      [Date]= "Monday" THEN 1
+ ELSEIF [Date]= "Tuesday" THEN 2
+ EL...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="5">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="198" y="18" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="Date" selected="True" type="String" size="255" />
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="6">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="198" y="150" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="Date" selected="True" type="String" size="255" />
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="7">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="402" y="150" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="IF      [Date]= &quot;Monday&quot; THEN 1&#xA; ELSEIF [Date]= &quot;Tuesday&quot; THEN 2&#xA; ELSEIF [Date]= &quot;Wednesday&quot; THEN 3&#xA; ELSEIF [Date]= &quot;Thursday&quot; THEN 4&#xA; ELSEIF [Date]= &quot;Friday&quot; THEN 5&#xA; ELSEIF [Date]= &quot;Saturday&quot; THEN 6&#xA; ELSE  7&#xA;ENDIF" field="Daynumber" size="2" type="Int16" />
+            <FormulaField expression="ToDate(DateTimeAdd('2019-06-24',[Daynumber]-1,'days'))" field="True Date" size="1073741823" type="V_WString" />
+            <FormulaField expression="IF Contains([Notes], &quot;$&quot;) then  Right((REGEX_REPLACE([Notes],&quot;[^0-9]&quot;,'')),4) else&#xA;TONUMBER(REGEX_REPLACE([Notes],&quot;[^0-9]?&quot;,''))&#xA;EndIF&#xA;" field="Policy No " size="1073741823" type="V_WString" />
+            <FormulaField expression="IF Length(ToString([Policy No ]))&gt;4 THEN 0 ELSE [Policy No ] ENDif" field="Policy No CHECK" size="1073741823" type="V_WString" />
+            <FormulaField expression="IF Contains([Notes], &quot;balance&quot;) then 1 ELSE 0 EndIF" field="Balance?" size="1073741823" type="V_WString" />
+            <FormulaField expression="IF Contains([Notes], &quot;complaint&quot;) then 1 ELSE 0 EndIF" field="Complaint?" size="1073741823" type="V_WString" />
+            <FormulaField expression="IF Contains([Notes], &quot;Statement&quot;)   then 1 ELSE 0 EndIF" field="Statement?" size="1073741823" type="V_WString" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Daynumber = IF      [Date]= "Monday" THEN 1
+ ELSEIF [Date]= "Tuesday" THEN 2
+ EL...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="8">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Union.Union">
+        <Position x="534" y="78" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <ByName_ErrorMode>Warning</ByName_ErrorMode>
+          <ByName_OutputMode>All</ByName_OutputMode>
+          <Mode>ByName</Mode>
+          <SetOutputOrder value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxUnion" />
+    </Node>
+    <Node ToolID="9">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Unique.Unique">
+        <Position x="822" y="78" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UniqueFields>
+            <Field field="Customer ID" />
+            <Field field="True Date" />
+            <Field field="Policy No" />
+            <Field field="Balance?" />
+            <Field field="Complaint?" />
+            <Field field="Statement?" />
+          </UniqueFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Unique: Customer ID, True Date, Policy No, Balance?, Complaint?, Statement?</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxUnique" />
+    </Node>
+    <Node ToolID="10">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="630" y="78" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="Customer ID" selected="True" />
+            <SelectField field="True Date" selected="True" />
+            <SelectField field="Policy No CHECK" selected="True" rename="Policy No" />
+            <SelectField field="Balance?" selected="True" />
+            <SelectField field="Complaint?" selected="True" />
+            <SelectField field="Statement?" selected="True" />
+            <SelectField field="*Unknown" selected="False" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="12">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="726" y="78" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Expression>[Policy No] != "0"</Expression>
+          <Mode>Simple</Mode>
+          <Simple>
+            <Operator>!=</Operator>
+            <Field>Policy No</Field>
+            <Operands>
+              <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+              <DateType>fixed</DateType>
+              <PeriodDate>2019-04-01 20:44:37</PeriodDate>
+              <PeriodType>
+              </PeriodType>
+              <PeriodCount>0</PeriodCount>
+              <Operand>0</Operand>
+              <StartDate>2019-04-01 20:44:37</StartDate>
+              <EndDate>2019-04-01 20:44:37</EndDate>
+            </Operands>
+          </Simple>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>[Policy No] != "0"</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="1" Connection="Output" />
+      <Destination ToolID="5" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="2" Connection="Output" />
+      <Destination ToolID="6" Connection="Input" />
+    </Connection>
+    <Connection name="#1">
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="8" Connection="Input" />
+    </Connection>
+    <Connection name="#2">
+      <Origin ToolID="7" Connection="Output" />
+      <Destination ToolID="8" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="5" Connection="Output" />
+      <Destination ToolID="3" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="6" Connection="Output" />
+      <Destination ToolID="7" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="8" Connection="Output" />
+      <Destination ToolID="10" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="10" Connection="Output" />
+      <Destination ToolID="12" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="12" Connection="True" />
+      <Destination ToolID="9" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="False" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>Prep Challenge S05</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>
